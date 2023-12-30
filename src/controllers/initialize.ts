@@ -10,6 +10,7 @@ const handler: MethodHandler = async (request) => {
     result: {
       capabilities: {
         colorProvider: true,
+        didSaveProvider: true,
         completionProvider: {},
       },
       serverInfo: {

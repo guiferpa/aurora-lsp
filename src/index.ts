@@ -1,11 +1,12 @@
 import Server from "./server";
 import * as controllers from "./controllers";
+import * as notifications from "./notications";
 
 const server = new Server();
 
-controllers.register(server);
+export default async function run() {
+  controllers.register(server);
+  notifications.register(server);
 
-server.notifiier("initialized", console.log);
-server.notifiier("workspace/didChangeConfiguration", console.log);
-
-server.listen(1337);
+  server.listen(1337);
+}

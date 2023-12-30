@@ -5,8 +5,11 @@
   "license": "MIT",
   "scripts": {
     "build": "rimraf ./dist && tsc -p ./tsconfig.json && tsc-alias",
-    "start": "node ./dist/src/index.js",
+    "start": "./bin/program",
     "dev": "yarn build && yarn start"
+  },
+  "bin": {
+    "aurora-lsp": "bin/program"
   },
   "devDependencies": {
     "@types/node": "^20.10.5",
