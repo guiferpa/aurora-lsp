@@ -1,46 +1,11 @@
-import net from "net";
-import { parser } from "./message";
+import Server from "./server";
+import * as controllers from "./controllers";
 
-const server = net.createServer((socket) => {
-  socket.on("data", (data) => {
-    const reqs = parser.request(data);
+const server = new Server();
 
-    if (reqs.length > 0) {
-      const [req] = reqs;
+controllers.register(server);
 
-      console.log(req);
+server.notifiier("initialized", console.log);
+server.notifiier("workspace/didChangeConfiguration", console.log);
 
-      if (req?.method === "initialize") {
-        const message = {
-          jsonrpc: "2.0",
-          id: 0,
-          result: {
-            capabilities: {
-              completionProvider: {},
-            },
-          },
-        };
-        socket.write(parser.response(message));
-      }
-
-      if (req?.method === "textDocument/completion") {
-        const message = {
-          jsonrpc: "2.0",
-          id: 0,
-          result: {
-            items: [{ label: "public", kind: 1 }],
-          },
-        };
-        socket.write(parser.response(message));
-      }
-
-      if (req?.method === "shutdown") {
-        throw new Error("Connection with client's down");
-      }
-    }
-  });
-
-  socket.pipe(socket);
-});
-
-server.listen(1337, "0.0.0.0");
+server.listen(1337);
