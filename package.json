@@ -9,7 +9,7 @@
     "dev": "yarn build && yarn start"
   },
   "bin": {
-    "aurora-lsp": "bin/program"
+    "alsp": "bin/program"
   },
   "devDependencies": {
     "@types/node": "^20.10.5",
