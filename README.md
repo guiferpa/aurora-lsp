@@ -1,0 +1,1 @@
+# Aurora Language Server Protocol
